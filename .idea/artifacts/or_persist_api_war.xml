@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="or-persist-api:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>or-persist-api</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="or-persist-api.war">
+      <element id="artifact" artifact-name="or-persist-api:war exploded" />
+    </root>
+  </artifact>
+</component>

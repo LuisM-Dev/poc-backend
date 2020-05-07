@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<server description="OpenLiberty Java EE 8 Server">
+
+    <featureManager>
+        <!-- https://www.ibm.com/support/knowledgecenter/en/was_beta_liberty/com.ibm.websphere.liberty.autogen.beta.doc/ae/rwlp_feature_webProfile-8.0.html -->
+        <feature>webProfile-8.0</feature>
+        <!-- https://www.ibm.com/support/knowledgecenter/en/was_beta_liberty/com.ibm.websphere.liberty.autogen.beta.doc/ae/rwlp_feature_microProfile-2.0.html -->
+        <feature>microProfile-2.1</feature>
+        <feature>openidConnectClient-1.0</feature>
+        <feature>transportSecurity-1.0</feature>
+    </featureManager>
+
+    <applicationMonitor updateTrigger="polled" pollingRate="5ms"/>
+
+    <httpEndpoint id="default-http-endpoint"
+                  httpPort="9080"
+                  httpsPort="9443"
+                  host="*">
+    </httpEndpoint>
+    <webApplication id="api-application"
+                    location="or-persist-api.war"
+                    contextRoot="/api">
+        <application-bnd>
+            <!--<security-role name="AllRole">
+                <special-subject type="ALL_AUTHENTICATED_USERS" />
+            </security-role>-->
+        </application-bnd>
+    </webApplication>
+    <library id="postgres-library">
+        <fileset dir="${server.config.dir}/lib" includes="postgresql-42.2.9.jar"/>
+    </library>
+    <library id="db2-library">
+        <fileset dir="${server.config.dir}/lib"
+                 includes="db2jcc.jar db2jcc4.jar db2jcc_license_cisuz.jar db2jcc_license_cu.jar"/>
+        <!--<fileset dir="${server.config.dir}/lib" includes="db2jcc4.jar db2jcc_license_cisuz.jar" />-->
+    </library>
+
+    <cors domain="/"
+          allowedOrigins="*"
+          allowedMethods="GET, DELETE, POST"
+          allowedHeaders="*"
+          allowCredentials="true"
+          maxAge="0"/>
+
+    <!--<logging maxFileSize="200" maxFiles="20" traceSpecification="*=all"></logging>-->
+
+    <dataSource id='postgresql-mydb' jdbcDriverRef='postgresql-driver' jndiName='jdbc/or'
+                transactional='true' type='javax.sql.ConnectionPoolDataSource'>
+        <properties id='postgresql-mydb-props'
+                    databaseName='postgres'
+                    user='postgres'
+                    password='postgres'
+                    portNumber='5432'
+                    serverName='localhost'/>
+    </dataSource>
+    <jdbcDriver id='postgresql-driver'
+                javax.sql.XADataSource='org.postgresql.xa.PGXADataSource'
+                javax.sql.ConnectionPoolDataSource='org.postgresql.ds.PGConnectionPoolDataSource'
+                libraryRef='postgres-library'/>
+
+<!--    <openidConnectClient id="IBMIDLogin"-->
+<!--                         clientId="${env.SSO_CLIENT_ID}" clientSecret="${env.SSO_CLIENT_SECRET}"-->
+<!--                         authorizationEndpointUrl="${env.SSO_AUTHORIZATION_ENDPOINT}"-->
+<!--                         tokenEndpointUrl="${env.SSO_TOKEN_ENDPOINT}"-->
+<!--                         validationEndpointUrl="${env.SSO_USERINFO_ENDPOINT}"-->
+<!--                         userInfoEndpointUrl="${env.SSO_USERINFO_ENDPOINT}"-->
+<!--                         issuerIdentifier="${env.SSO_CLIENT_ISSUER}"-->
+<!--                         userIdentityToCreateSubject="sub"-->
+<!--                         uniqueUserIdentifier="uniqueSecurityName"-->
+<!--                         scope="openid"-->
+<!--                         httpsRequired="true"-->
+<!--                         signatureAlgorithm="RS256"-->
+<!--                         trustStoreRef="myTrustStore"-->
+<!--                         trustAliasName="myTrustStore"-->
+<!--                         inboundPropagation="supported"-->
+<!--                         grantType="implicit"-->
+<!--                         responseType="token"-->
+<!--                         userInfoEndpointEnabled="true"-->
+<!--                         validationMethod="userinfo"-->
+<!--    />-->
+
+</server>

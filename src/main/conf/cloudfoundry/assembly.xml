@@ -1,0 +1,45 @@
+<assembly xmlns="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2 http://maven.apache.org/xsd/assembly-1.1.2.xsd">
+    <id>cloud-foundry-zip</id>
+    <formats>
+        <format>zip</format>
+    </formats>
+    <includeBaseDirectory>false</includeBaseDirectory>
+    <fileSets>
+        <fileSet>
+            <directory>${project.basedir}/src/main/conf/cloudfoundry</directory>
+            <outputDirectory>.</outputDirectory>
+            <includes>
+                <include>.profile</include>
+            </includes>
+        </fileSet>
+        <fileSet>
+            <directory>${project.basedir}/src/main/conf</directory>
+            <outputDirectory>wlp/usr/servers/${liberty.server.name}</outputDirectory>
+            <includes>
+                <include>server.xml</include>
+            </includes>
+        </fileSet>
+        <fileSet>
+            <directory>${project.basedir}/src/main/conf/lib</directory>
+            <outputDirectory>wlp/usr/servers/${liberty.server.name}/lib</outputDirectory>
+            <includes>
+                <include>*.jar</include>
+            </includes>
+        </fileSet>
+        <fileSet>
+            <directory>${project.basedir}/src/main/conf/mpopenapi</directory>
+            <outputDirectory>wlp/usr/servers/${liberty.server.name}/mpopenapi</outputDirectory>
+            <includes>
+                <include>**/*</include>
+            </includes>
+        </fileSet>
+        <fileSet>
+            <directory>${project.build.directory}</directory>
+            <outputDirectory>wlp/usr/servers/${liberty.server.name}/apps</outputDirectory>
+            <includes>
+                <include>${project.build.finalName}.war</include>
+            </includes>
+        </fileSet>
+    </fileSets>
+</assembly>

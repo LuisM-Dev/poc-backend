@@ -1,0 +1,34 @@
+.swagger-ui .headerbar {
+    background-color: rgba(0,0,0,.02);
+    border-bottom: 1px solid rgba(59,65,81,.3);
+    box-shadow: 0 1px 2px 0 rgba(0,0,0,.15);
+    padding: 8px 0;
+}
+.swagger-ui .headerbar .headerbar-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 1460px;
+    margin: 0 auto;
+    padding: 0;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    background-image: none;
+}
+.swagger-ui .headerbar .headerbar-wrapper:before,
+.swagger-ui .headerbar .headerbar-wrapper:after {
+    position: absolute;
+    display: block;
+    content: "";
+    top: 0;
+    height: 35px;
+    background-image: url(images/custom-logo.png);
+}
+.swagger-ui .headerbar .headerbar-wrapper:before {
+    left: 0;
+    width: 178px;
+}
+.swagger-ui .headerbar .headerbar-wrapper:after {
+    right: 0;
+    width: 155px;
+    background-position: -178px 0;
+}
