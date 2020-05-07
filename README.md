@@ -4,6 +4,8 @@
 
 ## Getting Started
 
+Proof of Concept app based on Microservices architecture and following Extreme Programming methodologies
+
 ### Installing Postgre SQL database
 You need to install Postgre SQL database (database name postgres, user postgres, password postgres on port 5432) or with some other specification (then change server.xml file to reflect that)
 
