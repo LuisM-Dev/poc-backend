@@ -27,7 +27,7 @@
         <version.lombok>1.18.10</version.lombok>
         <version.mapstruct>1.3.1.Final</version.mapstruct>
         <version.unirest>1.4.9</version.unirest>
-        <version.gson>2.8.6</version.gson>
+        <version.gson>2.8.9</version.gson>
 
         <jacoco.report.ut>${project.build.directory}/jacoco.exec</jacoco.report.ut>
         <jacoco.report.it>${project.build.directory}/jacoco-it.exec</jacoco.report.it>
